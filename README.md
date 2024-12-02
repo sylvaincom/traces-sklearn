@@ -1,5 +1,15 @@
 # Introduction to scikit-learn for the TRACES program
 
+This tutorial introduces how to use scikit-learn to craft predictive models using
+machine learning.
+
+## Browse online:
+
+[![Launch JupyterBook](./book/images/jupyterbook_badge.svg 'Our JupyterBook
+website')](https://github.com/glemaitre/traces-sklearn/) [![Launch
+JupyterLite](./book/images/jupyterlite_badge.svg 'Our JupyterLite
+website')](https://https://github.com/glemaitre/traces-sklearn/jupyterlite)
+
 ## Getting started
 
 ### Install `pixi`
