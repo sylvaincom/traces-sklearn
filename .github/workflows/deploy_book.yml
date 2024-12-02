@@ -19,13 +19,7 @@ jobs:
           pixi-version: v0.38.0
           environments: docs
 
-      - name: Convert Python file to notebooks for JupyterLite
-        run: pixi run -e docs convert-to-notebooks
-
-      - name: Build the JupyterLite site
-        run: pixi run -e docs build-jupyterlite
-
-      - name: Build and publish the book
+      - name: Build jupyterlite & book
         run: pixi run -e docs build-book
 
       - name: Copy jupyterlite site under the book directory
