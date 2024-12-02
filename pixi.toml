@@ -10,6 +10,7 @@ version = "0.1.0"
 
 [dependencies]
 jupyterlab = ">4.3,<5"
+jupytext = ">=1.16.4,<2"
 scikit-learn = ">=1.5,<1.6"
 
 [feature.dev.dependencies]
