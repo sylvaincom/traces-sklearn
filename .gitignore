@@ -38,3 +38,4 @@ content/notebooks
 
 # jupyterlite build
 jupyterlite/.jupyterlite.doit.db
+jupyterlite/dist/
