@@ -5,7 +5,7 @@ machine learning.
 
 ## Table of contents
 
-### Notebooks [![Launch JupyterLite](/images/jupyterlite_badge.svg 'Our JupyterLite website')](https://github.com/glemaitre/traces-sklearn/jupyterlite)
+### Notebooks [![Launch JupyterLite](/images/jupyterlite_badge.svg 'Our JupyterLite website')](https://glemaitre.github.io/traces-sklearn)
 
 ```{tableofcontents}
 ```

@@ -6,9 +6,9 @@ machine learning.
 ## Browse online:
 
 [![Launch JupyterBook](./book/images/jupyterbook_badge.svg 'Our JupyterBook
-website')](https://github.com/glemaitre/traces-sklearn/) [![Launch
+website')](https://glemaitre.github.io/traces-sklearn) [![Launch
 JupyterLite](./book/images/jupyterlite_badge.svg 'Our JupyterLite
-website')](https://https://github.com/glemaitre/traces-sklearn/jupyterlite)
+website')](https://glemaitre.github.io/traces-sklearn/jupyterlite)
 
 ## Getting started
 
