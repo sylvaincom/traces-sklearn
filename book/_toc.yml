@@ -4,6 +4,6 @@
 format: jb-book
 root: intro
 parts:
-- caption: Example
+- caption: Evaluation 101
   chapters:
-  - file: content/notebooks/example
+  - file: content/notebooks/01_evaluation_101
