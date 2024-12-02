@@ -5,10 +5,10 @@ machine learning.
 
 ## Table of contents
 
-### Notebooks [![Launch JupyterLite](/images/jupyterlite_badge.svg 'Our JupyterLite website')](https://glemaitre.github.io/traces-sklearn/jupyterlite)
-
 ```{tableofcontents}
 ```
+
+### Notebooks [![Launch JupyterLite](/images/jupyterlite_badge.svg 'Our JupyterLite website')](https://glemaitre.github.io/traces-sklearn/jupyterlite)
 
 ## Running the notebooks locally
 
