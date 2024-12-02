@@ -1,4 +1,4 @@
-# Introduction to scikit-learn for the TRACES program
+# Introduction to machine learning with `scikit-learn`
 
 This tutorial introduces how to use scikit-learn to craft predictive models using
 machine learning.
