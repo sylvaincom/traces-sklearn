@@ -7,3 +7,6 @@ parts:
 - caption: Evaluation 101
   chapters:
   - file: content/notebooks/01_evaluation_101
+- caption: Linear models
+  chapters:
+  - file: content/notebooks/02_linear_model_losses
