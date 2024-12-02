@@ -30,8 +30,7 @@ data.head()
 # Let's visualize the relationship between these measurements:
 
 # %%
-import seaborn as sns
-sns.set_context("poster")
+from matplotlib import pyplot as plt
 
 ax = data.plot.scatter(x=data.columns[0], y=data.columns[1])
 _ = ax.set_title("Can I predict penguins' body mass?")
@@ -132,6 +131,7 @@ model.fit(X, y)
 # Scikit-learn models store fitted parameters as attributes ending in underscore.
 # Our linear model stores `coef_` and `intercept_`:
 
+# %%
 model.coef_, model.intercept_
 
 # %% [markdown]
@@ -268,17 +268,21 @@ _ = ax.set(xlim=(0, 1), title="Distribution of the scores with repeated k-fold")
 #
 # ## Baseline model comparison
 #
+# It is common to compare the performance of a new model against simple models.
+# These baseline models do not necessarily have to learn anything from the data.
+# But they provide a reference to compare against.
+#
 # **EXERCISE**
 #
-# Compare your linear model against these baselines:
+# Compare your linear model against such a baseline:
 #
 # 1. Use cross-validation to get 30+ score estimates
-# 2. Try a `DummyRegressor` that predicts training set mean
-# 3. Use `permutation_test_score` to estimate random model performance
+# 2. Try a `DummyRegressor` that predicts the mean target value of the training set
+# 3. Use `permutation_test_score` function to estimate the performance of a random model
 # 4. Plot test score distributions for all three models
 
 # %%
-cv = RepeatedKFold(n_repeats=10, n_splits=3, random_state=42)
+# Write your code here.
 
 # %% [markdown]
 #
