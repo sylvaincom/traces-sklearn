@@ -1,2 +1,18 @@
-# traces-sklearn
-Introduction to scikit-learn for the TRACES program
+# Introduction to scikit-learn for the TRACES program
+
+## Getting started
+
+### Install `pixi`
+
+You can refer to the [official website](https://pixi.sh/latest/#installation) for
+installation.
+
+### Launching Jupyter Lab
+
+To launch Jupyter Lab, run the following command:
+
+```bash
+pixi run jupyter lab
+```
+
+The Python environment and necessary packages will be automatically installed for you.
