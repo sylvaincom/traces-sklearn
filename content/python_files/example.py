@@ -1,3 +1,7 @@
+# %% [markdown]
+#
+# # Example notebooks
+
 # %%
 import sklearn
 
