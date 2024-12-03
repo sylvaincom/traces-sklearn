@@ -16,10 +16,17 @@
 # before introducing scikit-learn. First, we load our dataset.
 
 # %%
+# When using JupyterLite, you will need to uncomment and install the `skrub` package.
+# %pip install skrub
+import matplotlib.pyplot as plt
+import skrub
+skrub.patch_display()  # make nice display for pandas tables
+
+# %%
 import pandas as pd
 
 data = pd.read_csv("../datasets/penguins_regression.csv")
-data.head()
+data
 
 # %% [markdown]
 #
@@ -33,7 +40,8 @@ data.head()
 from matplotlib import pyplot as plt
 
 ax = data.plot.scatter(x=data.columns[0], y=data.columns[1])
-_ = ax.set_title("Can I predict penguins' body mass?")
+ax.set_title("Can I predict penguins' body mass?")
+plt.show()
 
 # %% [markdown]
 #
@@ -247,7 +255,8 @@ cv_results[["train_score", "test_score"]]
 
 # %%
 ax = cv_results[["train_score", "test_score"]].plot.hist(alpha=0.7)
-_ = ax.set(xlim=(0, 1), title="Distribution of the scores with repeated k-fold")
+ax.set(xlim=(0, 1), title="Distribution of the scores with repeated k-fold")
+plt.show()
 
 # %% [markdown]
 #

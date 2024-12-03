@@ -7,15 +7,21 @@
 # body mass.
 
 # %%
+# When using JupyterLite, you will need to uncomment and install the `skrub` package.
+# %pip install skrub
+import matplotlib.pyplot as plt
+import skrub
+skrub.patch_display()  # make nice display for pandas tables
+
+# %%
 import pandas as pd
 
 data = pd.read_csv("../datasets/penguins_regression.csv")
-data.head()
+data
 
 # %%
-from matplotlib import pyplot as plt
-
-_ = data.plot.scatter(x="Flipper Length (mm)", y="Body Mass (g)")
+data.plot.scatter(x="Flipper Length (mm)", y="Body Mass (g)")
+plt.show()
 
 # %% [markdown]
 #
@@ -40,8 +46,8 @@ y_pred = model.predict(X)
 # %%
 ax = data.plot.scatter(x="Flipper Length (mm)", y="Body Mass (g)")
 ax.plot(X, y_pred, label=model.__class__.__name__, color="tab:orange", linewidth=4)
-_ = ax.legend()
-
+ax.legend()
+plt.show()
 # %% [markdown]
 #
 # The linear regression model minimizes the error between true and predicted targets.
@@ -74,7 +80,8 @@ xx = np.linspace(xmin, xmax, 100)
 
 # %%
 plt.plot(xx, se_loss(0, xx), label="SE loss")
-_ = plt.legend()
+plt.legend()
+plt.show()
 
 # %% [markdown]
 #
@@ -114,7 +121,8 @@ y_pred = model.predict(X)
 
 ax = data.plot.scatter(x="Flipper Length (mm)", y="Body Mass (g)")
 ax.plot(X, y_pred, label=model.__class__.__name__, color="black", linewidth=4)
-_ = ax.legend()
+plt.legend()
+plt.show()
 
 # %% [markdown]
 #
@@ -153,7 +161,8 @@ y_pred = model.predict(X)
 # %%
 ax = data.plot.scatter(x="Flipper Length (mm)", y="Body Mass (g)")
 ax.plot(X, y_pred, label=model.__class__.__name__, color="black", linewidth=4)
-_ = ax.legend()
+ax.legend()
+plt.show()
 
 # %% [markdown]
 #
@@ -195,7 +204,8 @@ ax.plot(
     color="tab:green",
     linewidth=4,
 )
-_ = ax.legend(loc="center left", bbox_to_anchor=(1, 0.5))
+ax.legend(loc="center left", bbox_to_anchor=(1, 0.5))
+plt.show()
 
 # %% [markdown]
 #
