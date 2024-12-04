@@ -16,3 +16,4 @@ parts:
 - caption: Tree-based models
   chapters:
   - file: content/notebooks/06_tree_model
+  - file: content/notebooks/07_ensemble_bagging
