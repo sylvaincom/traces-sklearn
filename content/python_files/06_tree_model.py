@@ -105,6 +105,7 @@ plt.show()
 #
 # Similarly, we get the following classification on the testing set.
 
+# %%
 display = DecisionBoundaryDisplay.from_estimator(tree, X_test, alpha=0.7)
 data_test.plot.scatter(
     x="Feature #0", y="Feature #1", c="Classes", s=50, edgecolor="black", ax=display.ax_
@@ -212,8 +213,8 @@ random_idx = rng.choice(dataset.size)
 
 ax = sns.swarmplot(x=dataset.values, y=[""] * len(dataset), hue=dataset.index)
 ax.set_xlabel(dataset.name)
-ax.set_title(f"Body mass threshold: {dataset[random_idx]} grams")
-ax.vlines(dataset[random_idx], -1, 1, color="red", linestyle="--")
+ax.set_title(f"Body mass threshold: {dataset.iloc[random_idx]} grams")
+ax.vlines(dataset.iloc[random_idx], -1, 1, color="red", linestyle="--")
 ax.legend(loc="center left", bbox_to_anchor=(1, 0.5))
 plt.show()
 
@@ -376,9 +377,9 @@ feature_names = ["Feature #0", "Feature #1"]
 target_name = "Class"
 
 # Blobs that will be interlaced
-X_1, y_1 = make_blobs(n_samples=300, centers=[[0, 0], [-1, -1]], random_state=42)
+X_1, y_1 = make_blobs(n_samples=300, centers=[[0, 0], [-1, -1]], random_state=0)
 # Blobs that will be easily separated
-X_2, y_2 = make_blobs(n_samples=300, centers=[[3, 6], [7, 0]], random_state=42)
+X_2, y_2 = make_blobs(n_samples=300, centers=[[3, 6], [7, 0]], random_state=0)
 
 X = np.concatenate([X_1, X_2], axis=0)
 y = np.concatenate([y_1, y_2])
