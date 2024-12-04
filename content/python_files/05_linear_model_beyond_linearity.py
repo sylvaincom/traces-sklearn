@@ -1,6 +1,6 @@
 # %% [markdown]
 #
-# ## Beyond linear separations
+# # Beyond linear separations
 #
 # This notebook shows how preprocessing makes linear models flexible enough to fit data
 # with non-linear relationships between features and targets.
