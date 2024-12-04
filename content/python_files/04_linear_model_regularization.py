@@ -305,7 +305,7 @@ data.plot.scatter(
     x="Culmen Length (mm)",
     y="Culmen Depth (mm)",
     c="Species",
-    cmap="RdBu",
+    edgecolor="black",
     s=50,
 )
 plt.show()
@@ -339,7 +339,7 @@ data.plot.scatter(
     x="Culmen Length (mm)",
     y="Culmen Depth (mm)",
     c="Species",
-    cmap="RdBu",
+    edgecolor="black",
     s=50,
     ax=display.ax_,
 )
