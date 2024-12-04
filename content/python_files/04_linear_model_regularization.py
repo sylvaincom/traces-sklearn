@@ -202,8 +202,8 @@ disp = ValidationCurveDisplay.from_estimator(
     cv=cv,
     std_display_style="errorbar",
     param_name="ridge__alpha",
-    param_range=np.logspace(-3, 3, num=100),
-    n_jobs=-1,
+    param_range=np.logspace(-3, 3, num=20),
+    n_jobs=2,
 )
 plt.show()
 
@@ -237,7 +237,7 @@ from scipy.stats import loguniform
 from sklearn.model_selection import RandomizedSearchCV
 
 param_distributions = {"ridge__alpha": loguniform(1e-3, 1e3)}
-search = RandomizedSearchCV(model, param_distributions, n_iter=30, cv=cv)
+search = RandomizedSearchCV(model, param_distributions, n_iter=10, cv=cv)
 search.fit(data_train, target_train)
 
 # %%
@@ -256,18 +256,6 @@ cv_results = cross_validate(
     search, data, target, cv=cv, return_estimator=True, return_train_score=True
 )
 pd.DataFrame(cv_results)[["train_score", "test_score"]]
-
-# %% [markdown]
-#
-# **EXERCISE**
-#
-# We store models from cross-validation, letting us inspect inner loop results.
-#
-# Plot the regularization parameter $\alpha$ for models selected in the outer loop.
-# This shows how stable $\alpha$ remains across cross-validation folds.
-
-# %%
-# Write your code here.
 
 # %% [markdown]
 #
