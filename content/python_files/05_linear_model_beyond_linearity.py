@@ -43,7 +43,7 @@ moons.plot.scatter(
     y=feature_names[1],
     c=y,
     s=50,
-    cmap=plt.cm.RdBu,
+    edgecolor="black",
 )
 plt.show()
 
@@ -92,9 +92,9 @@ model.fit(X, y)
 # %%
 from sklearn.inspection import DecisionBoundaryDisplay
 
-display = DecisionBoundaryDisplay.from_estimator(model, X, cmap=plt.cm.RdBu)
+display = DecisionBoundaryDisplay.from_estimator(model, X, cmap=plt.cm.viridis)
 moons.plot.scatter(
-    x=feature_names[0], y=feature_names[1], c=y, s=50, cmap=plt.cm.RdBu, ax=display.ax_
+    x=feature_names[0], y=feature_names[1], c=y, s=50, edgecolor="black", ax=display.ax_
 )
 plt.show()
 
@@ -112,9 +112,9 @@ model = Pipeline([("scaler", StandardScaler()), ("svc", SVC(kernel="poly", degre
 model.fit(X, y)
 
 # %%
-display = DecisionBoundaryDisplay.from_estimator(model, X, cmap=plt.cm.RdBu)
+display = DecisionBoundaryDisplay.from_estimator(model, X, cmap=plt.cm.viridis)
 moons.plot.scatter(
-    x=feature_names[0], y=feature_names[1], c=y, s=50, cmap=plt.cm.RdBu, ax=display.ax_
+    x=feature_names[0], y=feature_names[1], c=y, s=50, edgecolor="black", ax=display.ax_
 )
 plt.show()
 
@@ -129,9 +129,9 @@ model = Pipeline([("scaler", StandardScaler()), ("svc", SVC(kernel="rbf"))])
 model.fit(X, y)
 
 # %%
-display = DecisionBoundaryDisplay.from_estimator(model, X, cmap=plt.cm.RdBu)
+display = DecisionBoundaryDisplay.from_estimator(model, X, cmap=plt.cm.viridis)
 moons.plot.scatter(
-    x=feature_names[0], y=feature_names[1], c=y, s=50, cmap=plt.cm.RdBu, ax=display.ax_
+    x=feature_names[0], y=feature_names[1], c=y, s=50, edgecolor="black", ax=display.ax_
 )
 plt.show()
 # %% [markdown]
@@ -149,9 +149,9 @@ model = Pipeline(
 model.fit(X, y)
 
 # %%
-display = DecisionBoundaryDisplay.from_estimator(model, X, cmap=plt.cm.RdBu)
+display = DecisionBoundaryDisplay.from_estimator(model, X, cmap=plt.cm.viridis)
 moons.plot.scatter(
-    x=feature_names[0], y=feature_names[1], c=y, s=50, cmap=plt.cm.RdBu, ax=display.ax_
+    x=feature_names[0], y=feature_names[1], c=y, s=50, edgecolor="black", ax=display.ax_
 )
 plt.show()
 
