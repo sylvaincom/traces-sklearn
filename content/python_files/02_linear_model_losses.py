@@ -1,6 +1,6 @@
 # %% [markdown]
 #
-# # Linear models - Losses
+# # Losses
 #
 # This notebook explores linear models and loss functions in depth. We use the previous
 # regression problem that models the relationship between penguins' flipper length and
