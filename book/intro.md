@@ -5,13 +5,10 @@ machine learning.
 
 ## Table of contents
 
+[![Launch JupyterLite](/images/jupyterlite_badge.svg 'Our JupyterLite website')](https://glemaitre.github.io/traces-sklearn/jupyterlite)
+
 ```{tableofcontents}
 ```
-
-You can launch the notebooks interactively in your browser using JupyterLite by clicking
-on the badge below:
-
-[![Launch JupyterLite](/images/jupyterlite_badge.svg 'Our JupyterLite website')](https://glemaitre.github.io/traces-sklearn/jupyterlite)
 
 ## Running the notebooks locally
 
