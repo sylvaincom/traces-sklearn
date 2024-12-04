@@ -30,6 +30,8 @@
 # fixed like in linear models.
 #
 # ## Decision tree for classification
+#
+# Let's get some intuitions on how a decision tree works on a very simple dataset.
 
 # %%
 # When using JupyterLite, uncomment and install the `skrub` package.
@@ -65,13 +67,8 @@ plt.show()
 
 # %% [markdown]
 #
-# We create a function to create this scatter plot by passing 2 variables: `data`
-# and `labels`.
-#
-# ### Train a decision tree classifier
-#
-# We learn a set of binary rules using a portion of the data. Using these rules,
-# we predict on the testing data.
+# Now, we train a decision tree classifier on this dataset. We first split the data
+# into training and testing sets.
 
 # %%
 from sklearn.model_selection import train_test_split
@@ -113,6 +110,7 @@ data_test.plot.scatter(
 plt.show()
 
 # %% [markdown]
+# We see that the decision found with a decision tree is a simple binary split.
 #
 # We can also plot the tree structure.
 
@@ -503,6 +501,7 @@ plot_tree(
     tree, feature_names=feature_names, class_names=class_names, filled=True, ax=ax
 )
 plt.show()
+
 # %% [markdown]
 #
 # This hyperparameter ensures leaves contain a minimum number of samples and prevents
