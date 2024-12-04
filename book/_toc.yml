@@ -12,3 +12,4 @@ parts:
   - file: content/notebooks/02_linear_model_losses
   - file: content/notebooks/03_linear_model_preprocessing
   - file: content/notebooks/04_linear_model_regularization
+  - file: content/notebooks/05_linear_model_beyond_linearity
