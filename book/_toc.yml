@@ -18,3 +18,6 @@ parts:
   - file: content/notebooks/06_tree_model
   - file: content/notebooks/07_ensemble_bagging
   - file: content/notebooks/08_ensemble_boosting
+- caption: Hyperparameter tuning
+  chapters:
+  - file: content/notebooks/09_hyperparameter_tuning
