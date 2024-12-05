@@ -278,3 +278,16 @@ for estimator_cv_fold in cv_results["estimator"]:
 # %% [markdown]
 #
 # This inspection reveals the stability of hyperparameter values across folds.
+#
+# ## Note regarding the scoring metric to optimize during tuning
+#
+# The `GridSearchCV` and `RandomizedSearchCV` classes use the `scoring` parameter to
+# define the metric to optimize during tuning. If not specified, the scoring metric used
+# for classification is `accuracy` and the `r2_score` for regression.
+#
+# These scoring rules are actually not optimal for hyperparameter tuning. Indeed, we
+# recently recognized that it is better to use proper scoring rules. Such scoring rules
+# allow to get calibrated models.
+#
+# Therefore, we recommend to use `brier_score_loss` or `log_loss` for classification
+# and `mean_squared_error` for regression.
