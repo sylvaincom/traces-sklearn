@@ -94,7 +94,7 @@ next step.
 For `conda`, you can install the dependencies using the `environment.yml` file:
 
 ```bash
-conda env create -f environment.yml
+conda env create --file environment.yml
 ```
 
 For `pip`, you can install the dependencies using the `requirements.txt` file:
