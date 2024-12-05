@@ -32,6 +32,15 @@ jobs:
           conda activate traces-sklearn
           python -c "import sklearn; print(sklearn.__version__)"
 
+      - name: Convert python files to notebooks
+        shell: bash -el {0}
+        run: |
+          conda activate traces-sklearn
+          jupytext --to notebook ./content/python_files/*.py
+          mkdir -p ./content/notebooks
+          mv ./content/python_files/*.ipynb ./content/notebooks
+          ls -l ./content/notebooks
+
   test-pip:
     runs-on: ${{ matrix.os }}
     strategy:
@@ -50,3 +59,10 @@ jobs:
 
       - name: Test sklearn import
         run: python -c "import sklearn; print(sklearn.__version__)"
+
+      - name: Convert python files to notebooks
+        run: |
+          jupytext --to notebook ./content/python_files/*.py
+          mkdir -p ./content/notebooks
+          mv ./content/python_files/*.ipynb ./content/notebooks
+          ls -l ./content/notebooks
