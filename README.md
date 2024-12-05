@@ -40,7 +40,9 @@ JupyterLite is JupyterLab distribution running in the browser. It uses the Pyodi
 kernel. In short, you can click on the badge below to start the course in your
 browser. The lecture notes are located in `content/notebooks`.
 
-[![Launch JupyterLite](/images/jupyterlite_badge.svg 'Our JupyterLite website')](https://glemaitre.github.io/traces-sklearn/jupyterlite)
+[![Launch
+JupyterLite](./book/images/jupyterlite_badge.svg 'Our JupyterLite
+website')](https://glemaitre.github.io/traces-sklearn/jupyterlite)
 
 Here, we describe the pros and cons of this approach.
 
