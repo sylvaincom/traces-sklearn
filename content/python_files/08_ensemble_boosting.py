@@ -149,7 +149,7 @@ ax.legend()
 ax.set_title("Decision tree predictions \nwith misclassified samples highlighted")
 plt.show()
 
-# %% [markdown]
+# %%
 target_predicted = tree.predict(X)
 mask_new_misclassifier = y != target_predicted
 remaining_misclassified_samples_idx = mask_misclassified & mask_new_misclassifier
