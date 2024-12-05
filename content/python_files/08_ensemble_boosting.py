@@ -99,6 +99,7 @@ data[mask_misclassified].plot.scatter(
 ax.legend()
 ax.set_title("Decision tree predictions \nwith misclassified samples highlighted")
 plt.show()
+
 # %% [markdown]
 #
 # Our decision tree makes several errors for some Gentoo and Adelie samples.
@@ -244,8 +245,6 @@ plt.show()
 # %% [markdown]
 #
 # ### Histogram gradient boosting decision trees
-#
-# %% [markdown]
 #
 # **EXERCISE:** Accelerate gradient boosting
 #
