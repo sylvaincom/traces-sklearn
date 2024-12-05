@@ -127,6 +127,8 @@ data_test = pd.DataFrame(np.linspace(x_max, x_min, num=300), columns=["Feature"]
 target_train = pd.Series(y, name="Target")
 
 # %%
+# Uncomment this line in JupyterLite
+# %pip install seaborn
 import seaborn as sns
 
 ax = sns.scatterplot(x=data_train["Feature"], y=target_train, color="black", alpha=0.5)
@@ -150,8 +152,6 @@ bagged_trees.fit(data_train, target_train)
 # response from the bagging regressor.
 
 # %%
-import matplotlib.pyplot as plt
-
 for tree_idx, tree in enumerate(bagged_trees.estimators_):
     label = "Predictions of individual trees" if tree_idx == 0 else None
     tree_predictions = tree.predict(data_test.to_numpy())
@@ -276,6 +276,12 @@ plt.show()
 # Check the documentation for details. Since we work with a forest of trees, we have
 # an additional parameter `n_estimators`. Let's examine how this parameter affects
 # performance using a validation curve.
+
+# %%
+# Uncomment this line in JupyterLite
+# %pip install pyodide-http
+# import pyodide_http
+# pyodide_http.patch_all()
 
 # %%
 from sklearn.datasets import fetch_california_housing
