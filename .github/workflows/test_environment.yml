@@ -24,13 +24,13 @@ jobs:
 
       - name: Install dependencies with conda
         shell: bash -el {0}
-        run: |
-          conda env create -f environment.yml
-          conda activate traces-sklearn
+        run: conda env create -f environment.yml
 
       - name: Check sklearn
         shell: bash -el {0}
-        run: python -c "import sklearn; print(sklearn.__version__)"
+        run: |
+          conda activate traces-sklearn
+          python -c "import sklearn; print(sklearn.__version__)"
 
   test-pip:
     runs-on: ${{ matrix.os }}

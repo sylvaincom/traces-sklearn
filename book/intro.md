@@ -13,7 +13,21 @@ If you want to execute the notebooks yourself, refer to the next section.
 
 ## Executable version of the course
 
-We offer several ways to run the course locally.
+We offer several ways to run the course locally. The discussion below shows how to
+create a local environment to run the course. For your information, the following
+dependencies are required for the course:
+
+- `jupyterlab`
+- `jupytext`
+- `notebook`
+- `numpy`
+- `scipy`
+- `scikit-learn`
+- `skrub`
+- `pandas`
+- `pyarrow`
+- `matplotlib`
+- `seaborn`
 
 ### Running using JupyterLite
 
