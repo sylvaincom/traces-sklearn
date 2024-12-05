@@ -8,6 +8,8 @@ machine learning.
 You can preview the course as a JupyterBook. The table of contents is available below.
 If you want to execute the notebooks yourself, refer to the next section.
 
+### Table of contents
+
 ```{tableofcontents}
 ```
 
