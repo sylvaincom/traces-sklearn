@@ -244,14 +244,14 @@ plt.show()
 
 # %% [markdown]
 #
-# ### Histogram gradient boosting decision trees
+# ## Histogram gradient boosting decision trees
 #
 # **EXERCISE:** Accelerate gradient boosting
 #
 # What solutions accelerate the training speed of gradient boosting algorithms?
 #
 #
-# ## Short introduction to `KBinsDiscretizer`
+# ### Short introduction to `KBinsDiscretizer`
 #
 # Here's a trick to accelerate gradient boosting and decision trees in general.
 # Decision trees choose splits from all unique values in a feature. Binning
