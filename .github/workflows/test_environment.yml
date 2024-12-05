@@ -22,12 +22,15 @@ jobs:
         with:
           auto-update-conda: true
 
-      - name: Install dependencies with conda and check sklearn
+      - name: Install dependencies with conda
         shell: bash -el {0}
         run: |
           conda env create -f environment.yml
           conda activate traces-sklearn
-          python -c "import sklearn; print(sklearn.__version__)"
+
+      - name: Check sklearn
+        shell: bash -el {0}
+        run: python -c "import sklearn; print(sklearn.__version__)"
 
   test-pip:
     runs-on: ${{ matrix.os }}
