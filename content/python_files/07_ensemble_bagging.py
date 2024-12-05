@@ -1,6 +1,6 @@
 # %% [markdown]
 #
-# # Bagging-based estimator
+# # Bagged trees
 
 # %%
 # When using JupyterLite, uncomment and install the `skrub` package.
