@@ -63,15 +63,45 @@ Here, we describe the pros and cons of this approach.
 - We need to make some defensive import when those are optional dependencies of
   some libraries, e.g. importing `matplotlib` when using `pandas` plot.
 
-### Use `pixi`
+### Use `pixi`, `conda` or `pip`
 
-`pixi` is a package management tool allowing to manage Python environments. Here, you
-see that we have a `pixi.toml` and `pixi.lock` files that specify those environments.
+#### Prerequisites
 
-#### Install `pixi`
+First clone the repository:
 
-You can refer to the [official website](https://pixi.sh/latest/#installation) for
+```bash
+git clone https://github.com/glemaitre/traces-sklearn.git
+```
+
+Alternatively, download an archive at the
+[following link](https://github.com/glemaitre/traces-sklearn/archive/refs/heads/main.zip).
+
+#### Install the package manager
+
+For `pixi`, refer to the [official website](https://pixi.sh/latest/#installation) for
 installation.
+
+For `conda`, download and install the latest version of `miniforge` from the [official
+website](https://conda-forge.org/download/).
+
+For `pip`, it is already installed if you have Python.
+
+#### Install the dependencies
+
+For `pixi`, you don't need to do anything. It will be automatically installed in the
+next step.
+
+For `conda`, you can install the dependencies using the `environment.yml` file:
+
+```bash
+conda env create -f environment.yml
+```
+
+For `pip`, you can install the dependencies using the `requirements.txt` file:
+
+```bash
+pip install -r requirements.txt
+```
 
 #### Launching Jupyter Lab
 
@@ -83,37 +113,37 @@ pixi run jupyter lab
 
 The Python environment and necessary packages will be automatically installed for you.
 
-#### Opening lecture notes
-
-The lecture notes are available in the `python_files` directory. To open the Python
-file as notebook, you need to right click on the file and select
-`Open with` -> `Notebook`.
-
-### Use `conda`
-
-#### Install `miniforge`
-
-Download and install the latest version of `miniforge` from the [official
-website](https://conda-forge.org/download/).
-
-#### Create the environment
-
-You just have to run the following command:
-
-```bash
-conda env create -f environment.yml
-```
-
-and then activate the environment with:
+For `conda`, you need to activate the environment:
 
 ```bash
 conda activate traces-sklearn
 ```
 
-### Use `pip`
-
-You can use `pip` and install the dependencies using the `requirements.txt` file.
+Then, for `conda` and `pip`, you can launch Jupyter Lab with:
 
 ```bash
-pip install -r requirements.txt
+jupyter lab
+```
+
+#### Opening lecture notes
+
+The lecture notes are available in the `python_files` directory. To open the Python
+file as notebook, you need to right click on the file and select
+`Open with` -> `Notebook`. This is using `jupytext` to interpret those files as
+notebooks.
+
+Alternatively, you convert those files into notebooks.
+
+With `pixi`, you can run:
+
+```bash
+pixi run -e docs convert-to-notebooks
+```
+
+With `conda` and `pip`, you can run the `jupytext` command:
+
+```bash
+jupytext --to notebook ./content/python_files/*.py
+mkdir -p ./content/notebooks
+mv ./content/python_files/*.ipynb ./content/notebooks
 ```
