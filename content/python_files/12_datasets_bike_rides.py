@@ -2,8 +2,8 @@
 #
 # # The bike rides dataset
 #
-# In this notebook, we will present the "Bike Ride" dataset. This dataset is
-# located in the directory `datasets` in a comma separated values (CSV) format.
+# This notebook presents the "Bike Ride" dataset. The dataset exists in the directory
+# `datasets` in comma separated values (CSV) format.
 #
 # ## Presentation of the dataset
 #
@@ -25,26 +25,23 @@ cycling
 
 # %% [markdown]
 #
-# The first column `timestamp` contains a specific information regarding the the
-# time and date of a record while other columns contain numerical value of some
-# specific measurements. Let's check the data type of the columns more in
-# details.
+# The first column `timestamp` contains specific information about the time and date
+# of each record while other columns contain numerical measurements. Let's check the
+# data types of the columns in detail.
 
 # %%
 cycling.info()
 
 # %% [markdown]
 #
-# Indeed, CSV format store data as text. Pandas tries to infer numerical type by
-# default. It is the reason why all features but `timestamp` are encoded as
-# floating point values. However, we see that the `timestamp` is stored as an
-# `object` column. It means that the data in this column are stored as `str`
-# rather than a specialized `datetime` data type.
+# CSV format stores data as text. Pandas infers numerical types by default. This
+# explains why all features except `timestamp` appear as floating point values.
+# However, the `timestamp` appears as an `object` column. This means the data in
+# this column exists as `str` rather than a specialized `datetime` data type.
 #
-# In fact, one needs to set an option such that pandas is directed to infer such
-# data type when opening the file. In addition, we will want to use `timestamp`
-# as an index. Thus, we can reopen the file with some extra arguments to help
-# pandas at reading properly our CSV file.
+# We need to set an option to tell pandas to infer this data type when opening
+# the file. Additionally, we want to use `timestamp` as an index. We reopen the
+# file with extra arguments to help pandas read our CSV file properly.
 
 # %%
 cycling = pd.read_csv(
@@ -58,40 +55,33 @@ cycling.info()
 
 # %% [markdown]
 #
-# By specifying to pandas to parse the date, we obtain a `DatetimeIndex` that is
-# really handy when filtering data based on date.
+# By telling pandas to parse the date, we get a `DatetimeIndex` that helps filter
+# data based on date.
 #
-# We can now have a look at the data stored in our dataframe. It will help us to
-# frame the data science problem that we try to solve.
+# Let's examine the data stored in our dataframe. This helps us frame the data
+# science problem we aim to solve.
 #
-# The records correspond at information derived from GPS recordings of a cyclist
-# (`speed`, `acceleration`, `slope`) and some extra information acquired from
-# other sensors: `heart-rate` that corresponds to the number of beats per minute
-# of the cyclist heart, `cadence` that is the rate at which a cyclist is turning
-# the pedals, and `power` that corresponds to the work required by the cyclist
-# to go forward.
+# The records include information from GPS recordings of a cyclist (`speed`,
+# `acceleration`, `slope`) and extra information from other sensors: `heart-rate`
+# shows the number of heart beats per minute, `cadence` indicates how fast the
+# cyclist turns the pedals, and `power` measures the work required to move forward.
 #
-# The power might be slightly an abstract quantity so let's give a more
-# intuitive explanation.
+# To explain power more intuitively:
 #
-# Let's take the example of a soup blender that one uses to blend vegetable. The
-# engine of this blender develop an instantaneous power of ~300 Watts to blend
-# the vegetable. Here, our cyclist is just the engine of the blender (at the
-# difference that an average cyclist will develop an instantaneous power around
-# ~150 Watts) and blending the vegetable corresponds to move the cyclist's bike
-# forward.
+# Consider a soup blender used to blend vegetables. The blender's engine develops
+# ~300 Watts of instantaneous power. Here, our cyclist acts as the engine (though
+# an average cyclist develops ~150 Watts) and moving forward replaces blending
+# vegetables.
 #
-# Professional cyclists are using power to calibrate their training and track
-# the energy spent during a ride. For instance, riding at a higher power
-# requires more energy and thus, you need to provide resources to create this
-# energy. With human, this resource is food. For our soup blender, this resource
-# can be uranium, petrol, natural gas, coal, etc. Our body serves as a power
-# plant to transform the resources into energy.
+# Professional cyclists use power to calibrate their training and track energy
+# expenditure during rides. Higher power requires more energy, which demands more
+# resources to create this energy. Humans use food as their resource. A soup
+# blender might use uranium, petrol, natural gas, or coal. Our body works as a
+# power plant to transform resources into energy.
 #
-# The issue with measuring power is linked to the cost of the sensor: a cycling
-# power meter. The cost of such sensor vary from $400 to $1000. Thus, our data
-# science problem is quite easy: can we predict instantaneous cyclist power from
-# other (cheaper) sensors.
+# The challenge with measuring power relates to sensor cost: a cycling power meter
+# costs between $400 and $1000. This leads to our data science problem: predict
+# instantaneous cyclist power using other (cheaper) sensors.
 
 # %%
 target_name = "power"
@@ -99,7 +89,7 @@ data, target = cycling.drop(columns=target_name), cycling[target_name]
 
 # %% [markdown]
 #
-# We can have a first look at the target distribution.
+# Let's examine the target distribution first.
 
 # %%
 _, ax = plt.subplots()
@@ -109,47 +99,44 @@ plt.show()
 
 # %% [markdown]
 #
-# We see a pick at 0 Watts, it corresponds to whenever our cyclist does not
-# pedals (descent, stopped). In average, this cyclist delivers a power around
-# ~200 Watts. We also see a long tail from ~300 Watts to ~400 Watts. You can
-# think that this range of data correspond to effort a cyclist will train to
-# reproduce to be able to breakout in the final kilometers of a cycling race.
-# However, this is costly for the human body and no one can cruise with this
-# power output.
+# We see a peak at 0 Watts, representing moments when the cyclist stops pedaling
+# (during descents or stops). On average, this cyclist delivers ~200 Watts. A long
+# tail extends from ~300 Watts to ~400 Watts. This range represents efforts a
+# cyclist trains to reproduce for breakaways in the final kilometers of a race.
+# However, the human body finds it costly to maintain this power output.
 #
-# Now, let's have a look at the data.
+# Let's examine the data.
 
 # %%
 data
 
 # %% [markdown]
 #
-# We can first have a closer look to the index of the dataframe.
+# First, let's look closely at the dataframe index.
 
 # %%
 data.index
 
 # %% [markdown]
 #
-# We see that records are acquired every seconds.
+# The records occur every second.
 
 # %%
 data.index.min(), data.index.max()
 
 # %% [markdown]
 #
-# The starting date is the August 18, 2020 and the ending date is September 13,
-# 2020. However, it is obvious that our cyclist did not ride every seconds
-# between these dates. Indeed, only a couple of date should be present in the
-# dataframe, corresponding to the number of cycling rides.
+# The data spans from August 18, 2020 to September 13, 2020. Obviously, our cyclist
+# did not ride every second between these dates. Only a few dates should appear in
+# the dataframe, matching the number of cycling rides.
 
 # %%
 data.index.normalize().nunique()
 
 # %% [markdown]
 #
-# Indeed, we have only four different dates corresponding to four rides. Let's
-# extract only the first ride of August 18, 2020.
+# Four different dates correspond to four rides. Let's extract only the first ride
+# from August 18, 2020.
 
 # %%
 date_first_ride = "2020-08-18"
@@ -165,10 +152,9 @@ plt.show()
 
 # %% [markdown]
 #
-# Since the unit and range of each measurement (feature) is different, it is
-# rather difficult to interpret the plot. Also, the high temporal resolution
-# make it difficult to make any observation. We could resample the data to get a
-# smoother visualization.
+# Different units and ranges for each measurement (feature) make the plot hard to
+# interpret. Also, high temporal resolution obscures observations. Let's resample
+# the data for a smoother visualization.
 
 # %%
 data_ride.resample("60S").mean().plot()
@@ -178,7 +164,7 @@ plt.show()
 
 # %% [markdown]
 #
-# We can check the range of the different features:
+# Let's check the range of different features:
 
 # %%
 axs = data_ride.hist(figsize=(10, 12), bins=50, edgecolor="black", grid=False)
@@ -197,12 +183,11 @@ plt.show()
 
 # %% [markdown]
 #
-# From these plots, we can see some interesting information: a cyclist is
-# spending some time without pedaling. This samples should be associated with a
-# null power. We also see that the slope have large extremum.
+# These plots reveal interesting information: a cyclist spends time without
+# pedaling. These samples correspond to null power. The slope also shows large
+# extremes.
 #
-# Let's make a pair plot on a subset of data samples to see if we can confirm
-# some of these intuitions.
+# Let's create a pair plot on a subset of data samples to confirm these insights.
 
 # %%
 import numpy as np
@@ -226,25 +211,21 @@ plt.show()
 
 # %% [markdown]
 #
-# Indeed, we see that low cadence is associated with low power. We can also the
-# a link between higher slope / high heart-rate and higher power: a cyclist need
-# to develop more energy to go uphill enforcing a stronger physiological stimuli
-# on the body. We can confirm this intuition by looking at the interaction
-# between the slope and the speed: a lower speed with a higher slope is usually
-# associated with higher power.
+# Low cadence correlates with low power. Higher slopes and heart-rates link to
+# higher power: a cyclist needs more energy to climb hills, which demands more
+# from the body. The interaction between slope and speed confirms this: lower
+# speed with higher slope typically means higher power.
 #
 # ## Data science challenge
 #
-# The goal of this data science challenge is to predict the power delivered by
-# the cyclist given the other sensors measurements.
+# This challenge asks you to predict cyclist power from other sensor measurements.
 #
-# Please be creative! Go beyond the baseline model:
+# Go beyond the baseline model! Here are some ideas:
 #
-# - You can use physical models of the bike and the cyclist to predict the power
-#   (e.g. using the velocity of the cyclist and the slope to predict the power
-#   needed to go uphill).
-# - You can use a more black-box approach.
-# - You can try to predict confidence intervals as well.
-# - You can try to understand the influence of each sensor (i.e. feature importance).
-# - You should absolutely evaluate your different models using cross-validation.
-# - etc.
+# - Use physical models of the bike and cyclist to predict power (e.g. use
+#   velocity and slope to predict power needed for climbing).
+# - Try a black-box approach.
+# - Predict confidence intervals.
+# - Analyze sensor influence (i.e. feature importance).
+# - Evaluate your models using cross-validation.
+# - And more!
