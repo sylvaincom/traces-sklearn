@@ -25,3 +25,6 @@ parts:
   chapters:
   - file: content/notebooks/10_quantile_regression
   - file: content/notebooks/11_gaussian_process
+- caption: Data challenge problem
+  chapters:
+  - file: content/notebooks/12_datasets_bike_rides
