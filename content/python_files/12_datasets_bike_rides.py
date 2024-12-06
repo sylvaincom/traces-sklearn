@@ -157,7 +157,7 @@ plt.show()
 # the data for a smoother visualization.
 
 # %%
-data_ride.resample("60S").mean().plot()
+data_ride.resample("60s").mean().plot()
 ax.legend(bbox_to_anchor=(1.05, 1), loc="upper left")
 ax.set_title("Sensor values for different cyclist measurements")
 plt.show()
