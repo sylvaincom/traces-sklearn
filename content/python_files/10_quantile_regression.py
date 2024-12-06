@@ -2,17 +2,17 @@
 #
 # # Quantile regression
 #
-# In this notebook, we go into more details on how to predict intervals with the
-# available techniques in scikit-learn.
+# This notebook explores how to predict intervals with available techniques in
+# scikit-learn.
 #
-# Note that we will go only in a subset of available techniques. For instance, conformal
-# predictions are design for this specific task and you can have a look at packages as
-# MAPIE to have a broader coverage: https://github.com/scikit-learn-contrib/MAPIE.
+# We cover a subset of available techniques. For instance, conformal predictions
+# handle this specific task - see packages like MAPIE for broader coverage:
+# https://github.com/scikit-learn-contrib/MAPIE.
 #
 # ## Predicting intervals with linear models
 #
-# In this section, we come back to linear models and recall a way to predict intervals
-# with quantile regression.
+# This section revisits linear models and shows how to predict intervals with
+# quantile regression.
 #
 # First, let's load our penguins dataset for our regression task.
 
@@ -32,7 +32,7 @@ penguins
 
 # %% [markdown]
 #
-# In this dataset, the goal is to predict the body mass of a penguin given its flipper
+# In this dataset, we predict the body mass of a penguin given its flipper
 # length.
 
 # %%
@@ -41,10 +41,10 @@ y = penguins["Body Mass (g)"]
 
 # %% [markdown]
 #
-# When we studied linear models, we saw that the `LinearRegression` is an estimator that
-# minimizes the mean squared error and thus predicts the conditional mean of the target.
+# In our study of linear models, we saw that `LinearRegression` minimizes the mean
+# squared error and predicts the conditional mean of the target.
 #
-# Here, let's fit this model and predict severals data points between the minimum and
+# Here, we fit this model and predict several data points between the minimum and
 # maximum flipper length.
 
 # %%
@@ -76,11 +76,11 @@ plt.show()
 
 # %% [markdown]
 #
-# We discussed that the mean estimator could be sensitive to outliers and that sometimes
-# we might prefer to get a more robust estimator such as the median.
+# We discussed how mean estimators become sensitive to outliers. Sometimes we
+# prefer a more robust estimator like the median.
 #
-# In this case, we can use the `QuantileRegressor` that minimizes the mean absolute
-# error and thus predicts the conditional median.
+# Here, `QuantileRegressor` minimizes the mean absolute error and predicts the
+# conditional median.
 
 # %%
 from sklearn.linear_model import QuantileRegressor
@@ -112,14 +112,12 @@ plt.show()
 
 # %% [markdown]
 #
-# When it comes to confidence intervals, we might be interested to get a prediction of
-# some given quantiles. So we would like to generalize the quantile regression to get
-# other quantiles than the median. Fortunately, the pinball loss is a generalization of
-# the mean absolute error for any quantile.
+# For confidence intervals, we want to predict specific quantiles. We generalize
+# quantile regression beyond the median. The pinball loss generalizes the mean
+# absolute error for any quantile.
 #
-# Indeed, using the `quantile` parameter, we can set the quantile that we want to
-# predict. So if we are interested to get a 80% prediction interval, we can predict the
-# 10th and 90th percentiles.
+# The `quantile` parameter sets which quantile to predict. For an 80% prediction
+# interval, we predict the 10th and 90th percentiles.
 
 # %%
 model_estimate_10 = QuantileRegressor(quantile=0.1)
@@ -165,9 +163,8 @@ plt.show()
 #
 # **Exercise**:
 #
-# Now, this is your turn to repeat the previous experiment using the
-# `HistGradientBoostingRegressor`. You will have to read the documentation and check
-# how to change the parameters to optimize the right loss function.
+# Now repeat the previous experiment using `HistGradientBoostingRegressor`. Read
+# the documentation to find the parameters that optimize the right loss function.
 #
 # Plot the conditional mean, median and 80% prediction interval.
 
