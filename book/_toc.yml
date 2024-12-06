@@ -21,6 +21,7 @@ parts:
 - caption: Hyperparameter tuning
   chapters:
   - file: content/notebooks/09_hyperparameter_tuning
-- caption: Gaussian process
+- caption: Predicting with uncertainty
   chapters:
-  - file: content/notebooks/10_gaussian_process
+  - file: content/notebooks/10_quantile_regression
+  - file: content/notebooks/11_gaussian_process
