@@ -25,6 +25,7 @@ seaborn = ">=0.13.2,<1"
 ipykernel = "*"
 ipython = "*"
 pre-commit = "*"
+ruff = "*"
 
 [feature.docs.dependencies]
 jupyter-book = "*"
