@@ -89,6 +89,7 @@ plt.show()
 # greatly from our true generative model. However, these samples form a distribution
 # of models. We plot the mean and the 95% confidence interval.
 
+# %%
 mean_prediction, std_prediction = gaussian_process.predict(X, return_std=True)
 
 # %%
@@ -259,7 +260,7 @@ plt.show()
 from sklearn.datasets import fetch_openml
 
 co2 = fetch_openml(data_id=41187, as_frame=True)
-co2.frame.head()
+co2.frame
 
 # %% [markdown]
 #
@@ -271,7 +272,7 @@ import pandas as pd
 co2_data = co2.frame
 co2_data["date"] = pd.to_datetime(co2_data[["year", "month", "day"]])
 co2_data = co2_data[["date", "co2"]].set_index("date")
-co2_data.head()
+co2_data
 
 # %%
 co2_data.index.min(), co2_data.index.max()
@@ -295,6 +296,7 @@ plt.show()
 # We take a monthly average and drop months without measurements. This smooths
 # the data.
 
+# %%
 _, ax = plt.subplots(figsize=(8, 6))
 co2_data = co2_data.resample("ME").mean().dropna(axis="index", how="any")
 co2_data.plot(ax=ax)
@@ -316,15 +318,50 @@ plt.show()
 # %%
 X_train = (co2_data.index.year + co2_data.index.month / 12).to_numpy().reshape(-1, 1)
 y_train = co2_data["co2"].to_numpy()
-y_mean = y_train.mean()
-y_train -= y_mean
 
 # %% [markdown]
 #
 # ### Exercise
 #
-# Design a kernel for a Gaussian Process that fits the training data. Then
-# extrapolate values up to 2025.
+# Let's repeat the experiment from [1] (Sect. 5.4.3, p.119-122) by designing a
+# handmade kernel.
+#
+# Let's recall the definition of the kernel. The long-term trend is modeled by
+# a squared exponential kernel.
+#
+# $$ k_{1}(x, x') = \theta_{1}^2 \exp\left( -\frac{(x - x')^2}{2
+#     \theta_{2}^2} \right) $$
+#
+# The seasonal component uses an exponential sine squared kernel to encode the
+# periodicity. However, since the signal is not exactly periodic, it is fixed by
+# multiplying by a squared exponential kernel. Thus, it is defined as:
+#
+# $$ k_{2}(x, x') = \theta_{3}^2 \exp\left( -\frac{(x - x')^2}{2
+#     \theta_{4}^2} - \frac{2 \sin^2\left(\pi (x - x') \right)}{\theta_{5}^2} \right) $$
+#
+# The irregularities are modeled by a rational quadratic kernel.
+#
+# $$ k_{3}(x, x') = \theta_{6}^2 \left( 1 + \frac{(x - x')^2}{2 \theta_{8} \theta_{7}^2}
+#     \right)^{-\theta_{8}} $$
+#
+# Finally, we add a noise component to the kernel that is modeled by a squared
+# exponential kernel.
+#
+# $$ k_{4}(x, x') = \theta_{9}^2 \exp\left( -\frac{(x - x')^2}{2 \theta_{10}^2} \right)
+#     + \theta_{11}^2 \delta_{x, x'} $$
+#
+# The final kernel is a sum of the previous kernels:
+#
+# $$ k(x, x') = \theta_0 + k_{1}(x, x') + k_{2}(x, x') + k_{3}(x, x') + k_{4}(x, x') $$
+#
+# Where $\theta_0$ is a constant offset equal to the mean of the target.
+#
+# **References**:
+#
+# [1] Rasmussen, C. E., & Williams, C. K. (2006). *Gaussian Processes for Machine
+# Learning*. The MIT Press. https://gaussianprocess.org/gpml/chapters/RW.pdf
+#
+# Let's provide the bare-bones code to fit a Gaussian process with this kernel.
 
 # %%
 import datetime
@@ -336,39 +373,36 @@ X_test = np.linspace(start=1958, stop=current_month, num=1_000).reshape(-1, 1)
 
 # %%
 from sklearn.gaussian_process.kernels import (
-    ExpSineSquared,
-    RationalQuadratic,
-    WhiteKernel,
+    ConstantKernel,
+    ExpSineSquared,  # noqa: F401
+    RationalQuadratic,  # noqa: F401
+    WhiteKernel,  # noqa: F401
 )
 
+constant_kernel = ConstantKernel(constant_value=y_train.mean())
+long_term_trend_kernel = 1.0**2
+seasonal_kernel = 1.0**2
+irregularities_kernel = 1.0**2
+noise_kernel = 1.0**2
 
-long_term_trend_kernel = 50.0**2 * RBF(length_scale=50.0)
-seasonal_kernel = (
-    2.0**2
-    * RBF(length_scale=100.0)
-    * ExpSineSquared(length_scale=1.0, periodicity=1.0, periodicity_bounds="fixed")
-)
-irregularities_kernel = 0.5**2 * RationalQuadratic(length_scale=1.0, alpha=1.0)
-noise_kernel = 0.1**2 * RBF(length_scale=0.1) + WhiteKernel(
-    noise_level=0.1**2, noise_level_bounds=(1e-5, 1e5)
-)
 co2_kernel = (
-    long_term_trend_kernel + seasonal_kernel + irregularities_kernel + noise_kernel
+    constant_kernel
+    + long_term_trend_kernel
+    + seasonal_kernel
+    + irregularities_kernel
+    + noise_kernel
 )
 
 # %%
-gaussian_process = GaussianProcessRegressor(kernel=co2_kernel, normalize_y=False)
+gaussian_process = GaussianProcessRegressor(
+    kernel=co2_kernel, normalize_y=False, n_restarts_optimizer=1
+)
 gaussian_process.fit(X_train, y_train)
-
-# %%
 mean_y_pred, std_y_pred = gaussian_process.predict(X_test, return_std=True)
-mean_y_pred += y_mean
 
 # %%
 _, ax = plt.subplots(figsize=(8, 6))
-ax.plot(
-    X_train, y_train + y_mean, color="black", linestyle="dashed", label="Measurements"
-)
+ax.plot(X_train, y_train, color="black", linestyle="dashed", label="Measurements")
 ax.plot(X_test, mean_y_pred, color="tab:blue", alpha=0.4, label="Gaussian process")
 ax.fill_between(
     X_test.ravel(),
@@ -383,5 +417,3 @@ ax.set_ylabel("Monthly average of CO$_2$ concentration (ppm)")
 _ = ax.set_title(
     "Monthly average of air samples measurements\n" "from the Mauna Loa Observatory"
 )
-
-# %%
