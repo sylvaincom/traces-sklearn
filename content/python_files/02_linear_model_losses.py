@@ -11,6 +11,7 @@
 # %pip install skrub
 import matplotlib.pyplot as plt
 import skrub
+
 skrub.patch_display()  # make nice display for pandas tables
 
 # %%
@@ -45,7 +46,9 @@ predicted_target = model.predict(X)
 
 # %%
 ax = data.plot.scatter(x="Flipper Length (mm)", y="Body Mass (g)")
-ax.plot(X, predicted_target, label=model.__class__.__name__, color="tab:orange", linewidth=4)
+ax.plot(
+    X, predicted_target, label=model.__class__.__name__, color="tab:orange", linewidth=4
+)
 ax.legend()
 plt.show()
 # %% [markdown]
@@ -65,6 +68,7 @@ plt.show()
 # $$
 #
 # Let's visualize this loss function:
+
 
 # %%
 def se_loss(true_target, predicted_target):

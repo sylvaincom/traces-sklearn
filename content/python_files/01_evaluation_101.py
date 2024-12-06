@@ -20,6 +20,7 @@
 # %pip install skrub
 import matplotlib.pyplot as plt
 import skrub
+
 skrub.patch_display()  # make nice display for pandas tables
 
 # %%
@@ -215,12 +216,14 @@ model = LinearRegression()
 # Scikit-learn's `cross_validate` function handles this repeated evaluation:
 
 # %%
-from sklearn.model_selection import cross_validate
-from sklearn.model_selection import KFold
+from sklearn.model_selection import KFold, cross_validate
 
 cv = KFold(n_splits=5, shuffle=True, random_state=42)
 cv_results = cross_validate(
-    model, X, y, cv=cv,
+    model,
+    X,
+    y,
+    cv=cv,
     scoring="r2",
     return_train_score=True,
 )
@@ -245,11 +248,7 @@ cv_results[["train_score", "test_score"]].std()
 from sklearn.model_selection import RepeatedKFold
 
 cv = RepeatedKFold(n_repeats=10, n_splits=3, random_state=42)
-cv_results = cross_validate(
-    model, X, y, cv=cv,
-    scoring="r2",
-    return_train_score=True
-)
+cv_results = cross_validate(model, X, y, cv=cv, scoring="r2", return_train_score=True)
 cv_results = pd.DataFrame(cv_results)
 cv_results[["train_score", "test_score"]]
 

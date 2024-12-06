@@ -50,7 +50,7 @@ data
 
 # %%
 from sklearn.linear_model import LinearRegression
-from sklearn.model_selection import cross_validate, KFold
+from sklearn.model_selection import KFold, cross_validate
 
 model = skrub.tabular_learner(estimator=LinearRegression())
 model.set_output(transform="pandas")

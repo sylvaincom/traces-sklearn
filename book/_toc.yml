@@ -21,3 +21,6 @@ parts:
 - caption: Hyperparameter tuning
   chapters:
   - file: content/notebooks/09_hyperparameter_tuning
+- caption: Gaussian process
+  chapters:
+  - file: content/notebooks/10_gaussian_process

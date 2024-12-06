@@ -24,6 +24,7 @@ seaborn = ">=0.13.2,<1"
 [feature.dev.dependencies]
 ipykernel = "*"
 ipython = "*"
+pre-commit = "*"
 
 [feature.docs.dependencies]
 jupyter-book = "*"
@@ -32,6 +33,9 @@ jupyter_server = "*"
 jupyterlab_server = "*"
 jupyterlite-pyodide-kernel = "*"
 python-libarchive-c = "*"
+
+[feature.dev.tasks]
+lint = { cmd = "pre-commit install && pre-commit run -v --all-files --show-diff-on-failure" }
 
 [feature.docs.tasks]
 convert-to-notebooks = { cmd = "jupytext --to notebook ./content/python_files/*.py && mkdir -p ./content/notebooks && mv ./content/python_files/*.ipynb ./content/notebooks" }

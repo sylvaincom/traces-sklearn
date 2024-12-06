@@ -44,10 +44,9 @@ y
 # a `PolynomialFeatures` transformer.
 
 # %%
-from sklearn.preprocessing import StandardScaler
-from sklearn.preprocessing import PolynomialFeatures
 from sklearn.linear_model import Ridge
 from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import PolynomialFeatures, StandardScaler
 
 model = Pipeline(
     [
@@ -64,7 +63,7 @@ model
 
 # %%
 import pandas as pd
-from sklearn.model_selection import cross_validate, KFold
+from sklearn.model_selection import KFold, cross_validate
 
 cv = KFold(n_splits=10, shuffle=True, random_state=42)
 cv_results = cross_validate(model, X, y, cv=cv)

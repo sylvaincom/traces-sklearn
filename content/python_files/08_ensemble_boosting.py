@@ -292,6 +292,7 @@ X_trans
 
 # %%
 import time
+
 from sklearn.ensemble import HistGradientBoostingClassifier
 
 clf = HistGradientBoostingClassifier(max_iter=200, max_bins=10)

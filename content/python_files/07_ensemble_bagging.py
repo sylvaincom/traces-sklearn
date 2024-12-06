@@ -184,9 +184,8 @@ plt.show()
 
 # %%
 from sklearn.linear_model import Ridge
-from sklearn.preprocessing import PolynomialFeatures
-from sklearn.preprocessing import MinMaxScaler
 from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import MinMaxScaler, PolynomialFeatures
 
 polynomial_regressor = make_pipeline(
     MinMaxScaler(),
