@@ -20,7 +20,7 @@ jobs:
       - name: Set up conda
         uses: conda-incubator/setup-miniconda@v3
         with:
-          mamba-version: "*"
+          miniforge-version: latest
           channels: conda-forge
           channel-priority: true
           activate-environment: traces-sklearn
