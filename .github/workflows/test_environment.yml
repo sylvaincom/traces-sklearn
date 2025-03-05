@@ -20,7 +20,10 @@ jobs:
       - name: Set up conda
         uses: conda-incubator/setup-miniconda@v3
         with:
-          auto-update-conda: true
+          miniforge-variant: Mambaforge
+          use-mamba: true
+          activate-environment: traces-sklearn
+          environment-file: environment.yml
 
       - name: Install dependencies with conda
         shell: bash -el {0}
